@@ -1,6 +1,6 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
-import Room from '../Room./Room';
+import Room from '../Room/Room';
 
 
 const useStyles = makeStyles(theme => ({
