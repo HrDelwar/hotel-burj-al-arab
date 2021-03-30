@@ -1,8 +1,8 @@
 import { Button, Container, Grid, Typography } from '@material-ui/core';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { UserContext } from '../../App';
-import { handleGoogleSignInFirebase } from './LoginManager';
+import { getUserTokenFirebase, handleGoogleSignInFirebase } from './LoginManager';
 
 const Login = () => {
     const [loggedUser, setLoggedUser] = useContext(UserContext);
@@ -14,8 +14,12 @@ const Login = () => {
         handleGoogleSignInFirebase().then(res => {
             const { displayName, email } = res;
             const userInfo = { name: displayName, email };
-            setLoggedUser(userInfo);
-            history.replace(from);
+            getUserTokenFirebase()
+                .then(idToken => {
+                    sessionStorage.setItem('token', idToken);
+                    setLoggedUser(userInfo);
+                    history.replace(from);
+                })
         })
     }
     return (

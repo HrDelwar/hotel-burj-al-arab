@@ -14,3 +14,11 @@ export const handleGoogleSignInFirebase = () => {
         .then(result => result.user)
         .catch(error => error.message)
 }
+
+export const getUserTokenFirebase = () => {
+    return firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+        .then(idToken => idToken)
+        .catch(function (error) {
+            // Handle error
+        });
+}

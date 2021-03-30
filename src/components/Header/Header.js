@@ -43,16 +43,16 @@ const Header = () => {
                 <NavLink to='/home'>
                     <Button edge="start" className={classes.menuButton} aria-label="menu">Home</Button>
                 </NavLink>
-                <NavLink to='/login'>
+                {(loggedUser.name && loggedUser.email)? <Button edge="start" onClick={() => {
+                    setLoggedUser({})
+                    sessionStorage.removeItem('token')
+                }} className={classes.menuButton} aria-label="menu">Logout</Button>: <NavLink to='/login'>
                     <Button edge="start" className={classes.menuButton} aria-label="menu">Login</Button>
-                </NavLink>
-                <NavLink to='/book'>
+                </NavLink>}
+                
+                <NavLink to='/book/Single'>
                     <Button edge="start" className={classes.menuButton} aria-label="menu">Book</Button>
                 </NavLink>
-                {
-                    (loggedUser.name && loggedUser.email) &&
-                    <Button edge="start" onClick={() => setLoggedUser({})} className={classes.menuButton} aria-label="menu">Logout</Button>
-                }
             </Grid>
             <Typography variant="h2" color="inherit">Burj al arab</Typography>
             <Typography variant="overline" color="inherit">A global icon of arabian luxury.</Typography>
